@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VibeCode – Formação Prática em Programação até o Fullstack</title>
+  <meta name="description" content="Aprenda programação com estrutura, prática e direção real. Curso com 20 aulas ou Mentoria Completa Fullstack com Vibecoding. VibeCode." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:    #7B2DFF;
+      --secondary:  #A855F7;
+      --accent:     #C084FC;
+      --bg:         #050505;
+      --surface:    #101014;
+      --surface2:   #16161c;
+      --text:       #FFFFFF;
+      --text-muted: #D1D5DB;
+      --border:     rgba(255,255,255,0.10);
+      --glow:       0 0 32px rgba(123,45,255,0.35);
+      --glow-sm:    0 0 16px rgba(123,45,255,0.25);
+      --radius:     16px;
+      --radius-sm:  10px;
+      --font:       'Inter', sans-serif;
+      --transition: 0.22s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(123,45,255,0.15);
+      border: 1px solid rgba(123,45,255,0.35);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .section-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--secondary);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .section-title span {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      font-size: clamp(1rem, 2vw, 1.125rem);
+      color: var(--text-muted);
+      margin-top: 14px;
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    .section-header { margin-bottom: 56px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-subtitle { margin-left: auto; margin-right: auto; }
+
+    section { padding: 100px 0; }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(123,45,255,0.4), transparent);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 12px;
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      border: none;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: #fff;
+      padding: 16px 32px;
+      box-shadow: var(--glow-sm);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--glow);
+      filter: brightness(1.1);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      padding: 15px 32px;
+      border: 1px solid rgba(123,45,255,0.5);
+    }
+    .btn-outline:hover {
+      background: rgba(123,45,255,0.1);
+      border-color: var(--secondary);
+      transform: translateY(-2px);
+    }
+
+    .btn-lg { font-size: 1.075rem; padding: 18px 40px; }
+    .btn-full { width: 100%; }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(5,5,5,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .logo-icon {
+      width: 34px;
+      height: 34px;
+      background: rgba(123,45,255,0.12);
+      border: 1px solid rgba(123,45,255,0.35);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--glow-sm);
+    }
+
+    .logo-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--accent);
+      stroke-width: 2.1;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .nav { display: flex; align-items: center; gap: 32px; }
+
+    .nav a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+    .nav a:hover { color: var(--text); }
+
+    .header-cta { flex-shrink: 0; }
+
+    .nav-mobile-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav-mobile-btn span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px;
+      left: 0;
+      right: 0;
+      background: rgba(10,10,14,0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 24px;
+      z-index: 999;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-menu .btn { margin-top: 8px; }
+
+    .hero {
+      padding-top: 140px;
+      padding-bottom: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-glow-1 {
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, rgba(123,45,255,0.18) 0%, transparent 70%);
+    }
+
+    .hero-glow-2 {
+      position: absolute;
+      bottom: -80px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(168,85,247,0.10) 0%, transparent 70%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(123,45,255,0.15);
+      border: 1px solid rgba(123,45,255,0.35);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--secondary);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero-headline {
+      font-size: clamp(2.25rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .hero-headline .gradient-text {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 60%, #fff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subheadline {
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 64px;
+    }
+
+    .hero-highlights {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: border-color var(--transition);
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .hero-badge:hover { border-color: rgba(123,45,255,0.4); }
+
+    .value-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 100px 0;
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .value-text .section-title { margin-bottom: 20px; }
+
+    .value-text p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .value-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .value-bullet {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .bullet-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(123,45,255,0.2);
+      border: 1px solid rgba(123,45,255,0.4);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bullet-icon svg { width: 11px; height: 11px; }
+
+    .value-visual {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-visual::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(ellipse at center, rgba(123,45,255,0.15) 0%, transparent 70%);
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .audience-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .audience-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .audience-card:hover {
+      border-color: rgba(123,45,255,0.4);
+      transform: translateY(-4px);
+    }
+
+    .audience-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .audience-card:hover::before { opacity: 1; }
+
+    .audience-number {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      background: linear-gradient(135deg, rgba(123,45,255,0.3), rgba(192,132,252,0.2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+
+    .audience-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .audience-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .learning-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .learning-intro {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+      max-width: 680px;
+    }
+
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .topic-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 18px 20px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: all var(--transition);
+    }
+
+    .topic-item:hover {
+      border-color: rgba(123,45,255,0.4);
+      color: var(--text);
+      background: rgba(123,45,255,0.07);
+    }
+
+    .topic-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      flex-shrink: 0;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      position: relative;
+    }
+
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      top: 44px;
+      left: calc(12.5% + 20px);
+      right: calc(12.5% + 20px);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(123,45,255,0.5), rgba(123,45,255,0.5), rgba(123,45,255,0.5), transparent);
+      z-index: 0;
+    }
+
+    .step-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      transition: all var(--transition);
+    }
+
+    .step-card:hover {
+      border-color: rgba(123,45,255,0.4);
+      transform: translateY(-4px);
+      box-shadow: var(--glow-sm);
+    }
+
+    .step-number {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0 auto 24px;
+      box-shadow: var(--glow-sm);
+    }
+
+    .step-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .step-card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .plans-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .plan-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition);
+    }
+
+    .plan-card:hover { transform: translateY(-4px); }
+
+    .plan-card.featured {
+      border-color: rgba(123,45,255,0.5);
+      background: linear-gradient(160deg, #0d0820 0%, #0a0a10 100%);
+      box-shadow: 0 0 60px rgba(123,45,255,0.15), 0 0 1px rgba(123,45,255,0.6) inset;
+    }
+
+    .plan-card.featured::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+    }
+
+    .plan-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(123,45,255,0.2);
+      border: 1px solid rgba(123,45,255,0.4);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+
+    .plan-badge.premium {
+      background: rgba(168,85,247,0.2);
+      border-color: rgba(168,85,247,0.5);
+      color: #d8b4fe;
+    }
+
+    .plan-highlight-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 22px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(192,132,252,0.28);
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .plan-highlight-chip::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      box-shadow: 0 0 14px rgba(192,132,252,0.45);
+      flex-shrink: 0;
+    }
+
+    .plan-name {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .plan-description {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .plan-price {
+      margin-bottom: 36px;
+    }
+
+    .plan-price-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .plan-installment {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .plan-installment-times {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.2;
+      padding-bottom: 7px;
+    }
+
+    .plan-price-value {
+      font-size: clamp(2.2rem, 5vw, 3.1rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .plan-card.featured .plan-price-value {
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .plan-price-note {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .plans-note {
+      margin-top: 24px;
+      padding: 18px 20px;
+      border: 1px solid rgba(123,45,255,0.22);
+      border-radius: 14px;
+      background: rgba(123,45,255,0.08);
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .divider-line {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 32px;
+    }
+
+    .plan-features {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .plan-feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.925rem;
+      color: var(--text-muted);
+    }
+
+    .feature-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(123,45,255,0.15);
+      border: 1px solid rgba(123,45,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .plan-card.featured .feature-check {
+      background: rgba(168,85,247,0.2);
+      border-color: rgba(168,85,247,0.5);
+    }
+
+    .feature-check svg { width: 10px; height: 10px; }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .benefit-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      transition: all var(--transition);
+    }
+
+    .benefit-card:hover {
+      border-color: rgba(123,45,255,0.4);
+      transform: translateY(-3px);
+    }
+
+    .benefit-icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(123,45,255,0.12);
+      border: 1px solid rgba(123,45,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .benefit-icon-wrap svg { width: 22px; height: 22px; }
+
+    .benefit-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .benefit-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .vibecoding-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .vibecoding-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .vibecoding-text p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .vibe-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .vibe-bullet {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .vibe-bullet::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--secondary);
+      flex-shrink: 0;
+    }
+
+    .vibecoding-visual {
+      background: linear-gradient(160deg, #0d0820 0%, #0c0c16 100%);
+      border: 1px solid rgba(123,45,255,0.3);
+      border-radius: var(--radius);
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(123,45,255,0.1);
+    }
+
+    .vibecoding-visual::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(ellipse, rgba(123,45,255,0.2), transparent 70%);
+    }
+
+    .vibe-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 20px;
+      opacity: 0.7;
+    }
+
+    .vibe-feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .vibe-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .vibe-feature-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(123,45,255,0.4);
+    }
+
+    .why-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-text p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .why-points {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .why-point {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .why-point-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(123,45,255,0.12);
+      border: 1px solid rgba(123,45,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .why-point-dot svg { width: 15px; height: 15px; }
+
+    .why-visual {
+      position: relative;
+    }
+
+    .why-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-card::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 80px;
+      background: radial-gradient(ellipse, rgba(123,45,255,0.3), transparent 70%);
+    }
+
+    .why-card-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      background: rgba(123,45,255,0.12);
+      border: 1px solid rgba(123,45,255,0.28);
+      box-shadow: var(--glow-sm);
+    }
+
+    .why-card-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--accent);
+      stroke-width: 2.1;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .why-card h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .why-card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .mini-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .mini-stat {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .mini-stat-val {
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .mini-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .faq-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .faq-list {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .faq-item {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      transition: border-color var(--transition);
+    }
+
+    .faq-item.open { border-color: rgba(123,45,255,0.4); }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 24px;
+      cursor: pointer;
+      font-size: 0.975rem;
+      font-weight: 600;
+      color: var(--text);
+      user-select: none;
+    }
+
+    .faq-question:hover { color: var(--accent); }
+
+    .faq-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(123,45,255,0.12);
+      border: 1px solid rgba(123,45,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all var(--transition);
+    }
+
+    .faq-item.open .faq-icon {
+      background: rgba(123,45,255,0.25);
+      border-color: rgba(123,45,255,0.6);
+      transform: rotate(45deg);
+    }
+
+    .faq-icon svg { width: 12px; height: 12px; }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 24px;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding: 0 24px 22px;
+    }
+
+    .faq-answer p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .cta-final {
+      padding: 120px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-final-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .cta-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(123,45,255,0.22) 0%, transparent 70%);
+    }
+
+    .cta-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    .cta-final-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .cta-final h2 {
+      font-size: clamp(1.75rem, 4.5vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .cta-final h2 span {
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cta-final p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 44px;
+      line-height: 1.7;
+    }
+
+    .cta-btn-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .cta-microcopy {
+      margin-top: 24px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 1100;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .whatsapp-hint {
+      max-width: 220px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      background: rgba(16,16,20,0.96);
+      border: 1px solid rgba(168,85,247,0.28);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.4;
+      white-space: nowrap;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+      opacity: 0;
+      transform: translateX(10px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      pointer-events: none;
+    }
+
+    .whatsapp-float.show-hint .whatsapp-hint,
+    .whatsapp-float:hover .whatsapp-hint,
+    .whatsapp-float:focus-within .whatsapp-hint {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .whatsapp-link {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 18px 38px rgba(123,45,255,0.3), inset 0 1px 0 rgba(255,255,255,0.18);
+      transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+    }
+
+    .whatsapp-link::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      z-index: 0;
+    }
+
+    .whatsapp-link::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(192,132,252,0.18);
+      opacity: 0.75;
+      z-index: -1;
+    }
+
+    .whatsapp-link:hover,
+    .whatsapp-link:focus-visible {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 22px 44px rgba(123,45,255,0.4);
+      filter: brightness(1.08);
+    }
+
+    .whatsapp-link img {
+      position: relative;
+      z-index: 1;
+      width: 31px;
+      height: 31px;
+      display: block;
+    }
+
+    .footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 48px 0 36px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    @media (max-width: 1024px) {
+      section { padding: 80px 0; }
+      .hero { padding-top: 120px; padding-bottom: 80px; }
+      .value-grid { grid-template-columns: 1fr; gap: 48px; }
+      .vibecoding-inner { grid-template-columns: 1fr; gap: 48px; }
+      .why-inner { grid-template-columns: 1fr; gap: 48px; }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid::before { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 64px 0; }
+      .nav { display: none; }
+      .header-cta { display: none; }
+      .nav-mobile-btn { display: flex; }
+
+      .hero { padding-top: 110px; padding-bottom: 72px; }
+      .hero-headline { font-size: 2.1rem; }
+      .hero-subheadline { font-size: 0.975rem; }
+      .hero-cta-group { gap: 12px; }
+      .btn-lg { padding: 16px 28px; font-size: 1rem; }
+
+      .audience-cards { grid-template-columns: 1fr; gap: 16px; }
+      .audience-card { padding: 32px 24px; }
+
+      .plans-grid { grid-template-columns: 1fr; gap: 20px; }
+      .plan-card { padding: 36px 28px; }
+      .plan-card.featured { order: -1; }
+
+      .benefits-grid { grid-template-columns: 1fr; gap: 16px; }
+      .benefit-card { padding: 28px 24px; }
+
+      .topics-grid { grid-template-columns: 1fr; }
+
+      .steps-grid { grid-template-columns: 1fr; gap: 14px; }
+
+      .value-visual { padding: 28px; }
+      .stat-grid { gap: 14px; }
+
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .hero-headline { font-size: 1.85rem; }
+      .hero-cta-group { flex-direction: column; width: 100%; }
+      .hero-cta-group .btn { width: 100%; }
+      .cta-btn-group { flex-direction: column; width: 100%; }
+      .cta-btn-group .btn { width: 100%; }
+      .mini-stats { grid-template-columns: 1fr 1fr; }
+      .section-title { font-size: 1.6rem; }
+      .whatsapp-float { right: 18px; bottom: 18px; }
+      .whatsapp-link { width: 58px; height: 58px; }
+      .whatsapp-hint { max-width: 180px; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="#hero" class="logo">
+          <div class="logo-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M13 2L5 13h5l-1 9 8-11h-5l1-9z"/></svg>
+          </div>
+          Vibe<span>Code</span>
+        </a>
+        <nav class="nav">
+          <a href="#valor">Proposta</a>
+          <a href="#como-funciona">Como funciona</a>
+          <a href="#planos">Planos</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <a href="#planos" class="btn btn-primary header-cta">Ver planos</a>
+        <button class="nav-mobile-btn" id="mobileMenuBtn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#valor" onclick="closeMobile()">Proposta de valor</a>
+    <a href="#como-funciona" onclick="closeMobile()">Como funciona</a>
+    <a href="#planos" onclick="closeMobile()">Planos</a>
+    <a href="#vibecoding" onclick="closeMobile()">Vibecoding</a>
+    <a href="#faq" onclick="closeMobile()">FAQ</a>
+    <a href="#planos" class="btn btn-primary btn-full" onclick="closeMobile()">Ver planos</a>
+  </div>
+
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-glow-1"></div>
+      <div class="hero-glow-2"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-eyebrow">Formação prática em programação</div>
+        <h1 class="hero-headline">
+          Saia do zero ou acelere sua evolução até o<br />
+          <span class="gradient-text">fullstack</span> com uma formação guiada, prática e moderna.
+        </h1>
+        <p class="hero-subheadline">
+          Escolha entre o curso com 20 aulas ou a mentoria completa com acompanhamento até o fullstack utilizando vibecoding, com acesso à plataforma My Dev Academy e mais de 150 cursos de programação do zero ao fullstack.
+        </p>
+        <div class="hero-cta-group">
+          <a href="#planos" class="btn btn-primary btn-lg">Quero começar agora</a>
+          <a href="#planos" class="btn btn-outline btn-lg">Ver planos</a>
+        </div>
+        <div class="hero-highlights">
+          <div class="hero-badge">20 aulas estruturadas</div>
+          <div class="hero-badge">2 encontros por semana</div>
+          <div class="hero-badge">Exercícios práticos</div>
+          <div class="hero-badge">Certificado</div>
+          <div class="hero-badge">Acesso à plataforma</div>
+          <div class="hero-badge">Mentoria com acompanhamento</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="value-section" id="valor">
+    <div class="container">
+      <div class="value-grid">
+        <div class="value-text reveal">
+          <div class="section-tag">Proposta de valor</div>
+          <h2 class="section-title">Aprenda programação com <span>clareza, prática</span> e direção real.</h2>
+          <p>
+            Muita gente trava na programação porque consome conteúdo solto, sem sequência, sem acompanhamento e sem saber exatamente o que estudar primeiro. Aqui, você entra em uma jornada organizada, com aulas estruturadas, prática aplicada e um caminho pensado para evolução consistente.
+          </p>
+          <ul class="value-bullets">
+            <li class="value-bullet">
+              <div class="bullet-icon">
+                <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#A855F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              Conteúdo organizado do início ao avanço
+            </li>
+            <li class="value-bullet">
+              <div class="bullet-icon">
+                <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#A855F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              Aprendizado com aplicação prática
+            </li>
+            <li class="value-bullet">
+              <div class="bullet-icon">
+                <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#A855F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              Ritmo planejado para gerar consistência
+            </li>
+            <li class="value-bullet">
+              <div class="bullet-icon">
+                <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#A855F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              Acesso à My Dev Academy com +150 cursos
+            </li>
+            <li class="value-bullet">
+              <div class="bullet-icon">
+                <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#A855F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              Opção de mentoria para acompanhamento completo
+            </li>
+          </ul>
+        </div>
+        <div class="value-visual reveal reveal-delay-2">
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="stat-number">20</div>
+              <div class="stat-label">Aulas completas</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">10</div>
+              <div class="stat-label">Semanas de formação</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">2x</div>
+              <div class="stat-label">Aulas por semana</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">FS</div>
+              <div class="stat-label">Evolução até fullstack</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="para-quem">
+    <div class="container">
+      <div class="section-header center">
+        <div class="section-tag" style="margin: 0 auto 20px;">Para quem é</div>
+        <h2 class="section-title">Para quem é essa <span>formação</span></h2>
+        <p class="section-subtitle">Seja você iniciante ou alguém que quer acelerar, existe uma opção pensada para o seu momento.</p>
+      </div>
+      <div class="audience-cards">
+        <div class="audience-card reveal reveal-delay-1">
+          <div class="audience-number">01</div>
+          <h3>Para quem está começando</h3>
+          <p>Ideal para quem quer entrar na área de programação com um caminho mais claro, sem depender de conteúdos aleatórios.</p>
+        </div>
+        <div class="audience-card reveal reveal-delay-2">
+          <div class="audience-number">02</div>
+          <h3>Para quem quer acelerar</h3>
+          <p>Perfeito para quem já estudou alguma coisa, mas sente que falta direção, prática e consistência.</p>
+        </div>
+        <div class="audience-card reveal reveal-delay-3">
+          <div class="audience-number">03</div>
+          <h3>Para quem busca evolução real</h3>
+          <p>Se o seu objetivo é sair do básico e construir base para evoluir até o fullstack, essa estrutura foi feita para você.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="learning-section" id="aprendizado">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Jornada de aprendizado</div>
+        <h2 class="section-title">O que você vai <span>desenvolver</span> ao longo da jornada</h2>
+        <p class="section-subtitle learning-intro">A proposta não é apenas assistir aulas. É construir entendimento, prática e confiança para evoluir com base sólida.</p>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-item reveal"><span class="topic-dot"></span>Lógica de programação</div>
+        <div class="topic-item reveal reveal-delay-1"><span class="topic-dot"></span>Estrutura de raciocínio para desenvolvimento</div>
+        <div class="topic-item reveal reveal-delay-2"><span class="topic-dot"></span>Boas práticas de construção</div>
+        <div class="topic-item reveal"><span class="topic-dot"></span>Organização de projetos</div>
+        <div class="topic-item reveal reveal-delay-1"><span class="topic-dot"></span>Evolução técnica com visão prática</div>
+        <div class="topic-item reveal reveal-delay-2"><span class="topic-dot"></span>Base para avançar até o fullstack</div>
+        <div class="topic-item reveal"><span class="topic-dot"></span>Aplicação orientada com vibecoding (na mentoria)</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="como-funciona">
+    <div class="container">
+      <div class="section-header center">
+        <div class="section-tag" style="margin: 0 auto 20px;">Processo</div>
+        <h2 class="section-title">Como <span>funciona</span></h2>
+        <p class="section-subtitle">Um caminho simples, direto e projetado para levar você do primeiro passo à evolução real.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card reveal reveal-delay-1">
+          <div class="step-number">1</div>
+          <h3>Escolha seu plano</h3>
+          <p>Você escolhe entre o curso completo ou a mentoria completa com acompanhamento.</p>
+        </div>
+        <div class="step-card reveal reveal-delay-2">
+          <div class="step-number">2</div>
+          <h3>Acesse a plataforma</h3>
+          <p>Todo o conteúdo e a jornada ficam organizados com acesso à plataforma My Dev Academy, que também inclui mais de 150 cursos de programação do zero ao fullstack.</p>
+        </div>
+        <div class="step-card reveal reveal-delay-3">
+          <div class="step-number">3</div>
+          <h3>Siga a trilha de aulas</h3>
+          <p>São 20 aulas, com ritmo de 2 encontros por semana, para criar consistência e absorção real.</p>
+        </div>
+        <div class="step-card reveal reveal-delay-4">
+          <div class="step-number">4</div>
+          <h3>Pratique e evolua</h3>
+          <p>Você aplica o conteúdo com exercícios e, na mentoria, conta com acompanhamento completo até o fullstack.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="plans-section" id="planos">
+    <div class="container">
+      <div class="section-header center">
+        <div class="section-tag" style="margin: 0 auto 20px;">Planos</div>
+        <h2 class="section-title">Escolha a forma ideal de <span>evoluir</span></h2>
+        <p class="section-subtitle">Do aprendizado estruturado ao acompanhamento completo até o fullstack.</p>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card reveal reveal-delay-1">
+          <div class="plan-badge">Formação estruturada</div>
+          <h3 class="plan-name">VibeCode</h3>
+          <p class="plan-description">Para quem quer uma jornada completa com aulas, exercícios e certificado, com dúvidas tiradas durante a própria aula.</p>
+          <div class="plan-price">
+            <div class="plan-price-label">Em até 12x a partir de</div>
+            <div class="plan-installment">
+              <div class="plan-installment-times">12x</div>
+              <div class="plan-price-value">R$ 307,84</div>
+            </div>
+            <div class="plan-price-note">Valor do curso: R$ 3.000</div>
+          </div>
+          <div class="divider-line"></div>
+          <ul class="plan-features">
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#A855F7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>20 aulas completas</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#A855F7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>2 encontros por semana</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#A855F7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Exercícios práticos</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#A855F7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Certificado de conclusão</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#A855F7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Dúvidas respondidas durante a aula</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#A855F7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Acesso à My Dev Academy com +150 cursos</li>
+          </ul>
+          <a href="https://link.infinitepay.io/leandroveiga01/VC1DLTAtUg-D5aZ1Sx9X-3000,00" class="btn btn-outline btn-full" target="_blank" rel="noopener noreferrer">Quero o curso</a>
+        </div>
+
+        <div class="plan-card featured reveal reveal-delay-2">
+          <div class="plan-badge premium">Acompanhamento premium</div>
+          <div class="plan-highlight-chip">3 meses de acompanhamento</div>
+          <h3 class="plan-name">Mentoria Completa Fullstack com Vibecoding</h3>
+          <p class="plan-description">A mentoria é diferente do curso porque, além das aulas, existe um acompanhamento mais próximo durante 3 meses. Nós adaptamos o ensino ao ritmo do aluno, damos suporte durante a semana e ajustamos a forma de ensino sempre que necessário para garantir evolução real.</p>
+          <div class="plan-price">
+            <div class="plan-price-label">Em até 12x a partir de</div>
+            <div class="plan-installment">
+              <div class="plan-installment-times">12x</div>
+              <div class="plan-price-value">R$ 513,07</div>
+            </div>
+            <div class="plan-price-note">Valor da mentoria: R$ 5.000</div>
+          </div>
+          <div class="divider-line"></div>
+          <ul class="plan-features">
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#C084FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>20 aulas completas</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#C084FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>2 encontros por semana</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#C084FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Acompanhamento mais próximo durante 3 meses</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#C084FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Dúvidas ao longo do dia</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#C084FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Suporte durante a semana para dúvidas e direcionamentos</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#C084FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Acompanhamento de evolução</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#C084FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Relatórios simples semanais ou quinzenais</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#C084FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>O que aprendeu, onde teve dificuldade e próximos passos</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#C084FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Ensino adaptado ao ritmo do aluno</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#C084FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Evolução guiada até o fullstack</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#C084FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Metodologia com vibecoding</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#C084FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Certificado de conclusão</li>
+            <li class="plan-feature"><div class="feature-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#C084FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Acesso à My Dev Academy com +150 cursos</li>
+          </ul>
+          <a href="https://link.infinitepay.io/leandroveiga01/VC1DLTAtUg-wuBEBOmkr-5000,00" class="btn btn-primary btn-full" target="_blank" rel="noopener noreferrer">Quero a mentoria</a>
+        </div>
+      </div>
+      <div class="plans-note reveal">Quanto maior a quantidade de parcelas, maior tende a ser a taxa de juros cobrada pelo próprio banco. Se quiser uma taxa menor, podemos reduzir a quantidade de parcelas.</div>
+    </div>
+  </section>
+
+  <section id="beneficios">
+    <div class="container">
+      <div class="section-header center">
+        <div class="section-tag" style="margin: 0 auto 20px;">Benefícios</div>
+        <h2 class="section-title">Por que essa formação <span>faz sentido</span></h2>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card reveal reveal-delay-1"><div class="benefit-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.86 0 3.59.57 5.03 1.54"/></svg></div><div><h3>Menos confusão</h3><p>Você para de pular de conteúdo em conteúdo e passa a seguir uma trilha mais organizada.</p></div></div>
+        <div class="benefit-card reveal reveal-delay-2"><div class="benefit-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div><h3>Mais prática</h3><p>O foco é transformar aprendizado em aplicação real, e não só teoria.</p></div></div>
+        <div class="benefit-card reveal reveal-delay-1"><div class="benefit-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h3>Mais consistência</h3><p>O ritmo de 2 encontros por semana ajuda a manter constância sem sobrecarga.</p></div></div>
+        <div class="benefit-card reveal reveal-delay-2"><div class="benefit-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><h3>Mais evolução</h3><p>Na mentoria, você conta com acompanhamento completo para avançar com muito mais clareza.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="vibecoding-section" id="vibecoding">
+    <div class="container">
+      <div class="vibecoding-inner">
+        <div class="vibecoding-text reveal">
+          <div class="section-tag">Diferencial da mentoria</div>
+          <h2 class="section-title">Evolução com <span>vibecoding</span></h2>
+          <p>
+            A mentoria foi pensada para quem quer acelerar com estratégia, prática e acompanhamento real. Além das aulas, existe um acompanhamento mais próximo durante 3 meses. Nós adaptamos o ensino ao ritmo do aluno, damos suporte durante a semana para dúvidas, acompanhamos a evolução e ajustamos a forma de ensino sempre que necessário. O foco não é só ensinar, mas garantir que você realmente desenvolva e avance ao longo do período de mentoria.
+          </p>
+          <ul class="vibe-bullets">
+            <li class="vibe-bullet">Acompanhamento mais próximo por 3 meses</li>
+            <li class="vibe-bullet">Ensino adaptado ao ritmo do aluno</li>
+            <li class="vibe-bullet">Suporte durante a semana para dúvidas</li>
+            <li class="vibe-bullet">Evolução acompanhada com ajustes práticos</li>
+            <li class="vibe-bullet">Foco em desenvolvimento real</li>
+          </ul>
+        </div>
+        <div class="vibecoding-visual reveal reveal-delay-2">
+          <div class="vibe-label">Mentoria Fullstack · Vibecoding</div>
+          <div class="vibe-feature-list">
+            <div class="vibe-feature-item"><div class="vibe-feature-num">01</div>Acompanhamento personalizado e próximo</div>
+            <div class="vibe-feature-item"><div class="vibe-feature-num">02</div>Metodologia prática com vibecoding</div>
+            <div class="vibe-feature-item"><div class="vibe-feature-num">03</div>Direcionamento até o nível fullstack</div>
+            <div class="vibe-feature-item"><div class="vibe-feature-num">04</div>20 aulas estruturadas + suporte contínuo</div>
+            <div class="vibe-feature-item"><div class="vibe-feature-num">05</div>Construção de raciocínio para o mercado</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="container">
+      <div class="why-inner">
+        <div class="why-text reveal">
+          <div class="section-tag">VibeCode</div>
+          <h2 class="section-title">Por que escolher a <span>VibeCode</span></h2>
+          <p>
+            Porque aprender programação não deveria ser um processo confuso. A VibeCode entrega organização, clareza, prática e uma estrutura pensada para quem quer evoluir de verdade. Aqui, o objetivo não é só ensinar conteúdo. É ajudar você a construir trajetória.
+          </p>
+          <ul class="why-points">
+            <li class="why-point"><div class="why-point-dot"><svg viewBox="0 0 15 15" fill="none" stroke="#A855F7" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="11" height="11" rx="2"/><path d="M5 7.5h5M7.5 5v5"/></svg></div>Plataforma dedicada</li>
+            <li class="why-point"><div class="why-point-dot"><svg viewBox="0 0 15 15" fill="none" stroke="#A855F7" stroke-width="1.6" stroke-linecap="round"><path d="M7.5 1l1.8 3.8 4.2.6-3 3 .7 4.1-3.7-2-3.7 2 .7-4.1-3-3 4.2-.6z"/></svg></div>Formação estruturada</li>
+            <li class="why-point"><div class="why-point-dot"><svg viewBox="0 0 15 15" fill="none" stroke="#A855F7" stroke-width="1.6" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" transform="scale(0.7) translate(1.5,1.5)"/><path d="M4 8l3 3 4-5"/></svg></div>Proposta prática e aplicada</li>
+            <li class="why-point"><div class="why-point-dot"><svg viewBox="0 0 15 15" fill="none" stroke="#A855F7" stroke-width="1.6" stroke-linecap="round"><circle cx="7.5" cy="5" r="2.5"/><path d="M2 13c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/></svg></div>Mentoria com acompanhamento</li>
+            <li class="why-point"><div class="why-point-dot"><svg viewBox="0 0 15 15" fill="none" stroke="#A855F7" stroke-width="1.6" stroke-linecap="round"><polyline points="2 8 7.5 2 13 8"/><line x1="7.5" y1="2" x2="7.5" y2="13"/></svg></div>Visão de evolução até o fullstack</li>
+          </ul>
+        </div>
+        <div class="why-visual reveal reveal-delay-2">
+          <div class="why-card">
+            <div class="why-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2L5 13h5l-1 9 8-11h-5l1-9z"/></svg></div>
+            <h3>VibeCode</h3>
+            <p>Formação prática em programação com foco em evolução real, aplicação no mercado e desenvolvimento guiado até o nível fullstack.</p>
+          </div>
+          <div class="mini-stats">
+            <div class="mini-stat"><div class="mini-stat-val">20</div><div class="mini-stat-label">Aulas por formação</div></div>
+            <div class="mini-stat"><div class="mini-stat-val">10x</div><div class="mini-stat-label">Semanas de jornada</div></div>
+            <div class="mini-stat"><div class="mini-stat-val">2</div><div class="mini-stat-label">Planos disponíveis</div></div>
+            <div class="mini-stat"><div class="mini-stat-val">FS</div><div class="mini-stat-label">Meta: fullstack</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-header center">
+        <div class="section-tag" style="margin: 0 auto 20px;">FAQ</div>
+        <h2 class="section-title">Perguntas <span>frequentes</span></h2>
+        <p class="section-subtitle">Tudo que você precisa saber antes de começar.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question">Quantas aulas estão incluídas?<div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+          <div class="faq-answer"><p>Tanto o curso quanto a mentoria incluem 20 aulas.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Qual é o ritmo das aulas?<div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+          <div class="faq-answer"><p>O ritmo é de 2 encontros por semana.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Curso e mentoria incluem certificado?<div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+          <div class="faq-answer"><p>Sim. Tanto o curso quanto a mentoria incluem certificado, além do acesso à plataforma My Dev Academy.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Qual a diferença entre curso e mentoria?<div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+          <div class="faq-answer"><p>O curso entrega a formação com 20 aulas, exercícios, certificado e acesso à plataforma My Dev Academy, com dúvidas respondidas durante a aula. A mentoria inclui 20 aulas, certificado e um acompanhamento mais próximo durante 3 meses, com suporte durante a semana, adaptação ao ritmo do aluno, acompanhamento de evolução e relatórios simples mostrando o que foi aprendido, onde houve dificuldade e quais são os próximos passos.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Onde o conteúdo fica disponível?<div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+          <div class="faq-answer"><p>O acesso é liberado pela plataforma My Dev Academy, com mais de 150 cursos de programação do zero ao fullstack.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">A mentoria é para qual nível?<div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+          <div class="faq-answer"><p>Ela é ideal para quem quer uma evolução mais guiada, com acompanhamento e direção prática até o fullstack.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-final" id="cta">
+    <div class="cta-final-bg">
+      <div class="cta-glow"></div>
+      <div class="cta-grid-bg"></div>
+    </div>
+    <div class="container">
+      <div class="cta-final-inner reveal">
+        <div class="section-tag" style="margin: 0 auto 24px;">Comece agora</div>
+        <h2>Escolha hoje a forma certa de acelerar sua evolução <span>na programação</span>.</h2>
+        <p>Entre para a VibeCode e siga uma jornada com estrutura, prática e direção real.</p>
+        <div class="cta-btn-group">
+          <a href="#planos" class="btn btn-primary btn-lg">Quero entrar agora</a>
+          <a href="#planos" class="btn btn-outline btn-lg">Escolher meu plano</a>
+        </div>
+        <p class="cta-microcopy">Acesso pela plataforma My Dev Academy · +150 cursos de programação · 20 aulas com estrutura clara</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="logo" style="margin-bottom: 8px;">
+            <div class="logo-icon" style="width:28px;height:28px;" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2L5 13h5l-1 9 8-11h-5l1-9z"/></svg></div>
+            Vibe<span>Code</span>
+          </div>
+          <p class="footer-copy">© 2026 VibeCode. Todos os direitos reservados.</p>
+        </div>
+        <div class="footer-links">
+          <a href="#valor">Proposta</a>
+          <a href="#planos">Planos</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="whatsapp-float" id="whatsappFloat">
+    <div class="whatsapp-hint">Posso ajudar?</div>
+    <a href="https://wa.me/5511964956563?text=Oi%2C%20vim%20pela%20landing%20page%20da%20VibeCode%20e%20quero%20tirar%20uma%20duvida%20sobre%20o%20curso%20ou%20a%20mentoria." class="whatsapp-link" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp">
+      <img src="assets/whatsapp-icon.svg" alt="" aria-hidden="true" />
+    </a>
+  </div>
+
+  <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    function closeMobile() {
+      mobileMenu.classList.remove('open');
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+      }
+    });
+
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+
+        if (!isOpen) {
+          item.classList.add('open');
+        }
+      });
+    });
+
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        header.style.background = 'rgba(5,5,5,0.96)';
+      } else {
+        header.style.background = 'rgba(5,5,5,0.88)';
+      }
+    }, { passive: true });
+
+    const whatsappFloat = document.getElementById('whatsappFloat');
+
+    window.addEventListener('load', () => {
+      if (!whatsappFloat) {
+        return;
+      }
+
+      window.setTimeout(() => {
+        whatsappFloat.classList.add('show-hint');
+      }, 350);
+
+      window.setTimeout(() => {
+        whatsappFloat.classList.remove('show-hint');
+      }, 4600);
+    });
+  </script>
+</body>
+</html>
