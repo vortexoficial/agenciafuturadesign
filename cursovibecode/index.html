@@ -1744,9 +1744,126 @@
       .whatsapp-link { width: 58px; height: 58px; }
       .whatsapp-hint { max-width: 180px; font-size: 0.85rem; }
     }
+
+    /* ============================================================
+       PAGE LOADER
+    ============================================================ */
+    #page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #page-loader.loaded {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .loader-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      animation: loader-entrance 0.6s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    @keyframes loader-entrance {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .loader-icon {
+      width: 76px;
+      height: 76px;
+      background: rgba(123,45,255,0.1);
+      border: 1px solid rgba(123,45,255,0.35);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      animation: loader-icon-glow 2s ease-in-out infinite;
+    }
+    @keyframes loader-icon-glow {
+      0%, 100% { box-shadow: 0 0 32px rgba(123,45,255,0.4), 0 0 0 0 rgba(123,45,255,0.2); }
+      50%       { box-shadow: 0 0 60px rgba(168,85,247,0.65), 0 0 0 12px rgba(123,45,255,0); }
+    }
+    .loader-icon svg {
+      width: 40px;
+      height: 40px;
+      stroke: var(--accent);
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 70;
+      stroke-dashoffset: 70;
+      animation: loader-draw 0.75s cubic-bezier(0.45,0,0.35,1) 0.25s forwards;
+    }
+    @keyframes loader-draw {
+      to { stroke-dashoffset: 0; }
+    }
+    .loader-wordmark {
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      opacity: 0;
+      animation: loader-fade-up 0.5s ease 0.7s forwards;
+    }
+    .loader-wordmark span {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    @keyframes loader-fade-up {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .loader-bar-track {
+      width: 140px;
+      height: 2px;
+      background: rgba(123,45,255,0.15);
+      border-radius: 100px;
+      overflow: hidden;
+      opacity: 0;
+      animation: loader-fade-in 0.4s ease 0.9s forwards;
+    }
+    @keyframes loader-fade-in {
+      to { opacity: 1; }
+    }
+    .loader-bar {
+      height: 100%;
+      width: 0%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      animation: loader-progress 1.3s cubic-bezier(0.4,0,0.2,1) 1s forwards;
+    }
+    @keyframes loader-progress {
+      0%   { width: 0%; }
+      55%  { width: 70%; }
+      100% { width: 100%; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Page Loader -->
+  <div id="page-loader" role="status" aria-label="Carregando…">
+    <div class="loader-logo">
+      <div class="loader-icon">
+        <svg viewBox="0 0 24 24"><path d="M13 2L5 13h5l-1 9 8-11h-5l1-9z"/></svg>
+      </div>
+      <div class="loader-wordmark">Vibe<span>Code</span></div>
+    </div>
+    <div class="loader-bar-track"><div class="loader-bar"></div></div>
+  </div>
+
   <header class="header" id="header">
     <div class="container">
       <div class="header-inner">
@@ -2321,6 +2438,44 @@
         whatsappFloat.classList.remove('show-hint');
       }, 4600);
     });
+
+    // Page Loader
+    (function () {
+      var loader = document.getElementById('page-loader');
+      var bar    = loader.querySelector('.loader-bar');
+
+      function hideLoader() {
+        loader.classList.add('loaded');
+        loader.addEventListener('transitionend', function () {
+          loader.remove();
+        }, { once: true });
+      }
+
+      // Track both conditions: page loaded AND bar animation finished
+      var pageReady = false;
+      var animDone  = false;
+
+      function tryHide() {
+        if (pageReady && animDone) hideLoader();
+      }
+
+      // Mark page as ready
+      function onPageLoad() {
+        pageReady = true;
+        tryHide();
+      }
+      if (document.readyState === 'complete') {
+        pageReady = true;
+      } else {
+        window.addEventListener('load', onPageLoad);
+      }
+
+      // Mark animation as done when the progress bar finishes
+      bar.addEventListener('animationend', function () {
+        animDone = true;
+        tryHide();
+      }, { once: true });
+    })();
   </script>
 </body>
 </html>
