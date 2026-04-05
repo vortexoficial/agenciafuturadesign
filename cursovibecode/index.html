@@ -955,6 +955,64 @@
       line-height: 1.7;
     }
 
+    .vibecode-explainer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .vibecode-explainer-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 30px;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .vibecode-explainer-card:hover {
+      border-color: rgba(123,45,255,0.4);
+      transform: translateY(-4px);
+    }
+
+    .vibecode-explainer-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      background: rgba(123,45,255,0.14);
+      border: 1px solid rgba(123,45,255,0.32);
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    .vibecode-explainer-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .vibecode-explainer-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .vibecode-summary {
+      margin-top: 24px;
+      padding: 20px 22px;
+      border-radius: 14px;
+      border: 1px solid rgba(123,45,255,0.24);
+      background: rgba(123,45,255,0.08);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
     .vibecoding-section {
       background: var(--surface);
       border-top: 1px solid var(--border);
@@ -1510,6 +1568,7 @@
       .plan-card { padding: 36px 28px; }
       .plan-card.featured { order: -1; }
 
+      .vibecode-explainer-grid { grid-template-columns: 1fr; gap: 16px; }
       .benefits-grid { grid-template-columns: 1fr; gap: 16px; }
       .benefit-card { padding: 28px 24px; }
 
@@ -1833,6 +1892,24 @@
         <div class="benefit-card reveal reveal-delay-1"><div class="benefit-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h3>Mais consistência</h3><p>O ritmo de 2 encontros por semana ajuda a manter constância sem sobrecarga.</p></div></div>
         <div class="benefit-card reveal reveal-delay-2"><div class="benefit-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><h3>Mais evolução</h3><p>Na mentoria, você conta com acompanhamento completo para avançar com muito mais clareza.</p></div></div>
       </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="o-que-e-vibecoding">
+    <div class="container">
+      <div class="section-header center">
+        <div class="section-tag" style="margin: 0 auto 20px;">Metodologia</div>
+        <h2 class="section-title">O que e <span>vibecoding</span>?</h2>
+        <p class="section-subtitle">Vibecoding e uma abordagem mais guiada, pratica e adaptavel de evoluir em programacao. Em vez de apenas consumir teoria, voce desenvolve raciocinio construindo, aplicando e ajustando o processo com clareza.</p>
+      </div>
+      <div class="vibecode-explainer-grid">
+        <div class="vibecode-explainer-card reveal reveal-delay-1"><div class="vibecode-explainer-number">01</div><h3>Aprender construindo</h3><p>Voce entende os conceitos enquanto pratica. O foco sai do conteudo solto e vai para aplicacao real, com mais contexto e menos travamento.</p></div>
+        <div class="vibecode-explainer-card reveal reveal-delay-2"><div class="vibecode-explainer-number">02</div><h3>Evolucao com direcao</h3><p>Em vez de estudar sem saber o que priorizar, o aluno recebe um caminho mais claro sobre o que fazer agora, o que melhorar e como avancar.</p></div>
+        <div class="vibecode-explainer-card reveal reveal-delay-3"><div class="vibecode-explainer-number">03</div><h3>Ajuste ao seu ritmo</h3><p>A metodologia se adapta ao momento do aluno. Quando ha dificuldade, reforca a base; quando ha progresso, acelera os proximos passos com seguranca.</p></div>
+      </div>
+      <div class="vibecode-summary reveal">Na pratica, vibecoding combina clareza, execucao, feedback e evolucao continua. O objetivo nao e so assistir aulas, mas transformar aprendizado em desenvolvimento real.</div>
     </div>
   </section>
 
