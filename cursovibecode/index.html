@@ -1122,6 +1122,425 @@
       box-shadow: 0 0 12px rgba(123,45,255,0.4);
     }
 
+    /* ============================================================
+       INCOME SECTION
+    ============================================================ */
+    .income-section {
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .income-section::before {
+      content: '';
+      position: absolute;
+      top: -180px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(900px, 100%);
+      height: 380px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(123,45,255,0.18) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    /* progress track */
+    .income-track {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 52px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .income-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      flex: 0 0 auto;
+    }
+
+    .income-step-dot {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 2px solid rgba(123,45,255,0.35);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .income-step-dot svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--accent);
+      stroke-width: 1.8;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.65;
+    }
+
+    .income-step.active .income-step-dot {
+      border-color: var(--secondary);
+      background: rgba(123,45,255,0.16);
+      box-shadow: 0 0 22px rgba(123,45,255,0.36);
+    }
+
+    .income-step.active .income-step-dot svg { opacity: 1; }
+
+    .income-step-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .income-step.active .income-step-label { color: var(--accent); }
+
+    .income-connector {
+      flex: 1;
+      max-width: 100px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(123,45,255,0.3), rgba(123,45,255,0.3));
+      margin-bottom: 30px;
+      margin-left: 12px;
+      margin-right: 12px;
+    }
+
+    /* cards */
+    .income-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .income-card {
+      position: relative;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--surface2) 0%, rgba(10,10,14,1) 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .income-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+      border-color: rgba(123,45,255,0.3);
+    }
+
+    .income-card-accent {
+      height: 3px;
+      width: 100%;
+      background: linear-gradient(90deg, rgba(123,45,255,0.4), rgba(168,85,247,0.25));
+      flex-shrink: 0;
+    }
+
+    .income-card.featured .income-card-accent {
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      box-shadow: 0 0 20px rgba(123,45,255,0.45);
+    }
+
+    .income-card.featured {
+      border-color: rgba(123,45,255,0.44);
+      box-shadow: 0 32px 64px rgba(123,45,255,0.14), 0 0 0 1px rgba(123,45,255,0.1);
+    }
+
+    .income-card.featured:hover {
+      box-shadow: 0 36px 72px rgba(123,45,255,0.22), 0 0 0 1px rgba(123,45,255,0.2);
+    }
+
+    .income-featured-badge {
+      display: none;
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      font-size: 0.66rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 5px 12px;
+      border-radius: 100px;
+      box-shadow: 0 4px 14px rgba(123,45,255,0.45);
+    }
+
+    .income-card.featured .income-featured-badge { display: inline-flex; }
+
+    .income-card-body {
+      padding: 28px 28px 32px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .income-level {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(192,132,252,0.7);
+      margin-bottom: 12px;
+    }
+
+    .income-range {
+      font-size: clamp(1.0rem, 1.7vw, 1.45rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      white-space: nowrap;
+      background: linear-gradient(135deg, #fff 40%, rgba(192,132,252,0.8) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .income-card.featured .income-range {
+      background: linear-gradient(135deg, #fff 20%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .income-sep {
+      font-size: 0.52em;
+      font-weight: 400;
+      -webkit-text-fill-color: rgba(168,85,247,0.45);
+      background: none;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+      vertical-align: middle;
+      line-height: 1;
+    }
+
+    .income-mes {
+      font-size: 0.42em;
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      -webkit-text-fill-color: rgba(255,255,255,0.35);
+      background: none;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+      vertical-align: baseline;
+    }
+
+    .income-card-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 0 20px;
+    }
+
+    .income-card-body h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .income-card-body > p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .income-list {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-top: 20px;
+      flex: 1;
+    }
+
+    .income-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .income-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+      border-radius: 6px;
+      background-color: rgba(123,45,255,0.14);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M2 5l2.2 2.2 3.8-3.4' stroke='%23C084FC' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-size: 10px;
+      background-repeat: no-repeat;
+      background-position: center;
+      border: 1px solid rgba(123,45,255,0.35);
+      box-sizing: border-box;
+    }
+
+    .income-card.featured .income-list li::before {
+      background-color: rgba(123,45,255,0.24);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M2 5l2.2 2.2 3.8-3.4' stroke='%23A855F7' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      border-color: rgba(168,85,247,0.55);
+      box-shadow: 0 0 10px rgba(123,45,255,0.28);
+    }
+
+    /* bottom strip */
+    .income-bottom {
+      margin-top: 28px;
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .income-note {
+      padding: 30px 32px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.07);
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .income-note-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(123,45,255,0.14);
+      border: 1px solid rgba(123,45,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .income-note-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--accent);
+      stroke-width: 1.8;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .income-note p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.48);
+      line-height: 1.85;
+    }
+
+    .income-note p strong {
+      color: rgba(255,255,255,0.78);
+      font-weight: 600;
+    }
+
+    /* ticket table */
+    .income-ticket {
+      border-radius: var(--radius);
+      border: 1px solid rgba(123,45,255,0.25);
+      background: linear-gradient(160deg, rgba(123,45,255,0.09) 0%, rgba(16,16,20,0.98) 60%);
+      overflow: hidden;
+    }
+
+    .income-ticket-head {
+      padding: 18px 24px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .income-ticket-head svg {
+      width: 15px;
+      height: 15px;
+      stroke: var(--accent);
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .income-ticket-head > span {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+
+    .income-ticket-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .income-ticket-table thead th {
+      padding: 10px 24px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.26);
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .income-ticket-table thead th:last-child { text-align: right; }
+
+    .income-ticket-table tbody tr {
+      transition: background var(--transition);
+    }
+
+    .income-ticket-table tbody tr:hover {
+      background: rgba(123,45,255,0.07);
+    }
+
+    .income-ticket-table tbody td {
+      padding: 14px 24px;
+      font-size: 0.88rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+
+    .income-ticket-table tbody tr:last-child td { border-bottom: none; }
+
+    .income-ticket-table td:first-child {
+      color: rgba(255,255,255,0.58);
+      line-height: 1.5;
+    }
+
+    .income-ticket-table td:last-child { text-align: right; }
+
+    .income-ticket-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      background: rgba(123,45,255,0.18);
+      border: 1px solid rgba(123,45,255,0.36);
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
     .why-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1682,6 +2101,8 @@
       .hero { padding-top: 120px; padding-bottom: 80px; }
       .value-grid { grid-template-columns: 1fr; gap: 48px; }
       .vibecoding-inner { grid-template-columns: 1fr; gap: 48px; }
+      .income-grid { grid-template-columns: 1fr; }
+      .income-bottom { grid-template-columns: 1fr; }
       .why-inner { grid-template-columns: 1fr; gap: 48px; }
       .steps-grid { grid-template-columns: repeat(2, 1fr); }
       .steps-grid::before { display: none; }
@@ -1709,6 +2130,32 @@
       .vibecode-explainer-grid { grid-template-columns: 1fr; gap: 16px; }
       .benefits-grid { grid-template-columns: 1fr; gap: 16px; }
       .benefit-card { padding: 28px 24px; }
+      .income-track { display: none; }
+      .income-card.featured { order: -1; }
+
+      /* tabela de tickets: vira lista empilhada */
+      .income-ticket-table thead { display: none; }
+      .income-ticket-table tbody tr {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 14px 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+      }
+      .income-ticket-table tbody tr:last-child { border-bottom: none; }
+      .income-ticket-table tbody td {
+        display: block;
+        padding: 0;
+        border: none;
+        font-size: 0.87rem;
+      }
+      .income-ticket-table td:first-child { color: rgba(255,255,255,0.55); }
+      .income-ticket-table td:last-child { text-align: left; }
+      .income-ticket-pill {
+        white-space: nowrap;
+        font-size: 0.8rem;
+        padding: 5px 12px;
+      }
 
       .topics-grid { grid-template-columns: 1fr; }
 
@@ -2208,6 +2655,139 @@
             <div class="vibe-feature-item"><div class="vibe-feature-num">05</div>Evolução prática até o fullstack</div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="income-section" id="ganhos-autonomo">
+    <div class="container">
+
+      <div class="section-header center">
+        <div class="section-tag" style="margin: 0 auto 20px;">Mercado atual</div>
+        <h2 class="section-title">Quanto fatura um programador <span>vibecoding</span> autônomo?</h2>
+        <p class="section-subtitle">Autônomos não recebem salário, eles faturam projetos. Com vibecoding acelerando a entrega, estas são as faixas reais praticadas hoje no mercado brasileiro por quem já tem método e sabe se posicionar.</p>
+      </div>
+
+      <!-- tracker de progressão -->
+      <div class="income-track reveal">
+        <div class="income-step active">
+          <div class="income-step-dot">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <span class="income-step-label">Inicial</span>
+        </div>
+        <div class="income-connector"></div>
+        <div class="income-step active">
+          <div class="income-step-dot">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <span class="income-step-label">Crescimento</span>
+        </div>
+        <div class="income-connector"></div>
+        <div class="income-step active">
+          <div class="income-step-dot">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <span class="income-step-label">Avançado</span>
+        </div>
+      </div>
+
+      <!-- cards de faixa -->
+      <div class="income-grid">
+
+        <article class="income-card reveal reveal-delay-1">
+          <div class="income-card-accent"></div>
+          <div class="income-card-body">
+            <div class="income-level">Faixa inicial</div>
+            <div class="income-range">R$&nbsp;3k <span class="income-sep">●</span> R$&nbsp;6k <span class="income-mes">/mês</span></div>
+            <div class="income-card-divider"></div>
+            <h3>Primeiros projetos no mercado</h3>
+            <p>Validando oferta, construindo portfólio e fechando projetos menores. O vibecoding encurta o tempo de entrega mesmo nessa fase.</p>
+            <ul class="income-list">
+              <li>Landing pages e páginas de vendas</li>
+              <li>Sites institucionais e ajustes rápidos</li>
+              <li>Automações simples e integrações básicas</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="income-card featured reveal reveal-delay-2">
+          <div class="income-card-accent"></div>
+          <span class="income-featured-badge">Mais comum</span>
+          <div class="income-card-body">
+            <div class="income-level">Faixa de crescimento</div>
+            <div class="income-range">R$&nbsp;7k <span class="income-sep">●</span> R$&nbsp;15k <span class="income-mes">/mês</span></div>
+            <div class="income-card-divider"></div>
+            <h3>Entrega com processo e recorrência</h3>
+            <p>Proposta definida, clientes recorrentes. O vibecoding gera ganho real: mesmo resultado em menos tempo, com mais margem.</p>
+            <ul class="income-list">
+              <li>Dashboards, painéis e sistemas internos</li>
+              <li>Sites robustos com fluxos automatizados</li>
+              <li>Pacotes mensais de evolução e manutenção</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="income-card reveal reveal-delay-3">
+          <div class="income-card-accent"></div>
+          <div class="income-card-body">
+            <div class="income-level">Faixa avançada</div>
+            <div class="income-range">R$&nbsp;15k <span class="income-sep">●</span> R$&nbsp;30k+ <span class="income-mes">/mês</span></div>
+            <div class="income-card-divider"></div>
+            <h3>Alto valor com nicho definido</h3>
+            <p>Posicionamento forte, revisão técnica e operação comercial consistente. Frequentemente trabalha com contratos maiores e equipe enxuta.</p>
+            <ul class="income-list">
+              <li>MVPs, SaaS e aplicativos sob medida</li>
+              <li>Automações com IA para operações reais</li>
+              <li>Contratos recorrentes e tickets elevados</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- nota + tabela de tickets -->
+      <div class="income-bottom">
+
+        <div class="income-note reveal reveal-delay-1">
+          <div class="income-note-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <p>
+            Essas faixas <strong>não são garantia</strong>, variam conforme repertório técnico, capacidade de venda, nicho, prazo e retenção.
+            Vibecoding acelera a produção, mas o resultado financeiro depende de <strong>direção, revisão crítica e posicionamento profissional</strong>.
+          </p>
+        </div>
+
+        <div class="income-ticket reveal reveal-delay-2">
+          <div class="income-ticket-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <span>Tickets que puxam esse faturamento</span>
+          </div>
+          <table class="income-ticket-table">
+            <thead>
+              <tr>
+                <th>Tipo de serviço</th>
+                <th>Faixa de valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Landing pages e páginas de vendas</td>
+                <td><span class="income-ticket-pill">R$&nbsp;1.500 – R$&nbsp;5.000</span></td>
+              </tr>
+              <tr>
+                <td>Sites, dashboards e automações leves</td>
+                <td><span class="income-ticket-pill">R$&nbsp;4.000 – R$&nbsp;12.000</span></td>
+              </tr>
+              <tr>
+                <td>Sistemas, apps e MVPs com IA</td>
+                <td><span class="income-ticket-pill">R$&nbsp;10.000 – R$&nbsp;30.000+</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
       </div>
     </div>
   </section>
