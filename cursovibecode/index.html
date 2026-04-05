@@ -1638,7 +1638,13 @@
       display: flex;
       align-items: center;
       gap: 10px;
+       text-decoration: none;
+       transition: opacity var(--transition);
     }
+
+     .footer-credit:hover {
+       opacity: 0.9;
+     }
 
     .footer-credit img {
       width: 78px;
@@ -2231,10 +2237,10 @@
 
       <div class="footer-bottom">
         <p class="footer-copy">© 2026 VibeCode. Todos os direitos reservados.</p>
-        <div class="footer-credit">
+        <a class="footer-credit" href="https://agenciafuturadesign.com" target="_blank" rel="noopener noreferrer" aria-label="Abrir site da Futura Design">
           <img src="assets/futura-design-logo.webp" alt="FUTURA DESIGN" />
           <span>Desenvolvido por FUTURA DESIGN</span>
-        </div>
+        </a>
       </div>
 
     </div>
