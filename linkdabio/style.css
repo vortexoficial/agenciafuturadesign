@@ -1,0 +1,538 @@
+/* ============================================================
+   XIBIU DEMAIS — style.css
+   Tema: Feminino, moderno, dark com acentos pink/laranja
+   Mobile-first | Glassmorphism | Icones Lordicon
+============================================================ */
+
+/* ========================
+   CSS VARIABLES
+======================== */
+:root {
+  --pink:          #FF1493;
+  --pink-light:    #FF69B4;
+  --orange:        #FF6B35;
+  --gold:          #FFD166;
+  --green:         #25D366;
+  --purple:        #833AB4;
+  --instagram:     #E1306C;
+
+  --bg-dark:       #0d0912;
+  --bg-card:       rgba(255, 255, 255, 0.05);
+  --bg-card-hover: rgba(255, 255, 255, 0.09);
+  --border-subtle: rgba(255, 255, 255, 0.09);
+  --border-pink:   rgba(255, 20, 147, 0.4);
+
+  --text-white:    #FFFFFF;
+  --text-muted:    rgba(255, 255, 255, 0.60);
+  --text-faint:    rgba(255, 255, 255, 0.30);
+
+  --gradient-cta:  linear-gradient(135deg, var(--pink) 0%, var(--orange) 100%);
+  --gradient-bg:   linear-gradient(145deg, #0d0912 0%, #1a0a1a 55%, #0e0d1f 100%);
+  --shadow-glow:   0 0 24px rgba(255, 20, 147, 0.25);
+  --shadow-card:   0 8px 32px rgba(0, 0, 0, 0.40);
+
+  --radius-card:   20px;
+  --radius-btn:    50px;
+  --radius-sm:     12px;
+
+  --transition:    all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================
+   RESET & BASE
+======================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--gradient-bg);
+  min-height: 100vh;
+  color: var(--text-white);
+  overflow-x: hidden;
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ========================
+   LORDICON ICONS
+======================== */
+.licon {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.licon-btn {
+  width: 18px;
+  height: 18px;
+}
+
+.licon-title {
+  width: 24px;
+  height: 24px;
+}
+
+.licon-xl {
+  width: 72px;
+  height: 72px;
+  display: block;
+  margin: 0 auto 16px;
+}
+
+.licon-sm {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.licon-white {
+  filter: brightness(0) invert(1);
+}
+
+.licon-faint {
+  filter: brightness(0) invert(1);
+  opacity: 0.45;
+}
+
+/* ========================
+   BACKGROUND BLOBS
+======================== */
+.bg-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.13;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob-1 {
+  width: 450px;
+  height: 450px;
+  background: var(--pink);
+  top: -120px;
+  left: -120px;
+  animation: floatBlob 10s ease-in-out infinite;
+}
+
+.blob-2 {
+  width: 350px;
+  height: 350px;
+  background: var(--orange);
+  bottom: 5%;
+  right: -100px;
+  animation: floatBlob 12s ease-in-out infinite reverse;
+}
+
+.blob-3 {
+  width: 280px;
+  height: 280px;
+  background: var(--pink-light);
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: floatBlob 9s ease-in-out infinite 4s;
+}
+
+@keyframes floatBlob {
+  0%, 100% { transform: translateY(0) scale(1); }
+  40%       { transform: translateY(-25px) scale(1.06); }
+  70%       { transform: translateY(12px) scale(0.96); }
+}
+
+/* ========================
+   CONTAINER
+======================== */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 28px 16px 48px;
+}
+
+/* ========================
+   GLASSMORPHISM BASE
+======================== */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card), var(--shadow-glow);
+}
+
+/* ========================
+   PRODUCTS SECTION
+======================== */
+.products-section {
+  animation: fadeUp 0.65s ease-out 0.1s both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--text-white);
+  letter-spacing: 0.2px;
+}
+
+/* ---- Search bar ---- */
+.search-wrapper {
+  position: relative;
+  margin-bottom: 22px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 100%;
+  padding: 13px 16px 13px 46px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-btn);
+  color: var(--text-white);
+  font-size: 0.88rem;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  transition: var(--transition);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-input:focus {
+  border-color: var(--pink);
+  background: rgba(255, 20, 147, 0.06);
+  box-shadow: 0 0 0 3px rgba(255, 20, 147, 0.15);
+}
+
+/* ---- No results ---- */
+.no-results {
+  text-align: center;
+  padding: 44px 20px;
+  color: var(--text-muted);
+}
+
+.no-results p {
+  font-size: 0.92rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ========================
+   PRODUCTS GRID
+======================== */
+.products-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ========================
+   PRODUCT CARD
+======================== */
+.product-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  transition: var(--transition);
+  animation: cardIn 0.45s ease-out both;
+}
+
+.product-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  border-color: var(--border-pink);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(255, 20, 147, 0.22);
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card-image-area {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+}
+
+.card-image-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .card-image-area img {
+  transform: scale(1.06);
+}
+
+.card-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255,20,147,0.12) 0%, rgba(255,107,53,0.12) 100%);
+}
+
+.card-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--gradient-cta);
+  color: #fff;
+  font-size: 0.70rem;
+  font-weight: 700;
+  padding: 4px 11px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.card-body {
+  padding: 16px 18px 18px;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-white);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.card-description {
+  font-size: 0.81rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  line-height: 1.55;
+}
+
+.card-price {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+
+.card-cta {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: var(--gradient-cta);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  border: none;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  letter-spacing: 0.3px;
+}
+
+.card-cta:hover {
+  opacity: 0.88;
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(255, 20, 147, 0.40);
+}
+
+/* ========================
+   CONTACT SECTION
+======================== */
+.contact-section {
+  margin-top: 36px;
+  text-align: center;
+  padding: 28px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  animation: fadeUp 0.65s ease-out 0.3s both;
+}
+
+.contact-title {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+.contact-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: var(--radius-btn);
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: var(--transition);
+}
+
+.contact-btn.whatsapp {
+  background: linear-gradient(135deg, var(--green), #128C7E);
+  color: #fff;
+}
+
+.contact-btn.instagram {
+  background: linear-gradient(135deg, var(--instagram), var(--purple));
+  color: #fff;
+}
+
+.contact-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* ========================
+   FOOTER
+======================== */
+.footer {
+  margin-top: 28px;
+  text-align: center;
+  padding: 16px;
+  animation: fadeUp 0.65s ease-out 0.4s both;
+}
+
+.footer-main {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.footer-disclaimer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 0.70rem;
+  color: var(--text-faint);
+  line-height: 1.6;
+}
+
+/* ========================
+   CREDITS (Futura Design)
+======================== */
+.credits {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding-bottom: 8px;
+}
+
+.credits-label {
+  font-size: 0.68rem;
+  color: var(--text-faint);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.credits-link {
+  display: flex;
+  align-items: center;
+}
+
+.credits-logo {
+  height: 22px;
+  width: auto;
+  display: block;
+  opacity: 0.55;
+  transition: opacity 0.25s ease;
+  filter: brightness(0) invert(1);
+}
+
+.credits-link:hover .credits-logo {
+  opacity: 0.9;
+}
+
+/* ========================
+   RESPONSIVE — TABLET
+======================== */
+@media (min-width: 540px) {
+  .container {
+    padding: 36px 24px 56px;
+  }
+
+  .card-image-area {
+    height: 220px;
+  }
+}
+
+/* ========================
+   RESPONSIVE — DESKTOP
+======================== */
+@media (min-width: 768px) {
+  .container {
+    padding: 44px 24px 64px;
+  }
+
+  .card-image-area {
+    height: 240px;
+  }
+
+  .products-grid {
+    gap: 20px;
+  }
+}
