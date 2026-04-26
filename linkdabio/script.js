@@ -1,124 +1,57 @@
 /* ============================================================
    XIBIU DEMAIS — script.js
    Edite o array `products` para adicionar, remover ou alterar
-   os produtos exibidos na pagina.
+   os produtos exibidos na página.
 ============================================================ */
 
 // ============================================================
 //  ARRAY DE PRODUTOS
-//  Campos disponiveis:
-//    id          -> numero unico (nao repita)
-//    name        -> nome do produto
-//    description -> descricao curta
-//    tag         -> badge no canto da imagem (texto puro)
-//    price       -> preco ou label (deixe "" para ocultar)
-//    button      -> texto do botao CTA
-//    link        -> URL de afiliado (coloque o link real aqui)
-//    image       -> URL da imagem do produto ("" usa placeholder)
+//  Campos disponíveis:
+//    id          → número único (não repita)
+//    name        → nome do produto
+//    description → descrição curta
+//    tag         → badge no canto da imagem (texto puro)
+//    price       → preço ou label (deixe "" para ocultar)
+//    button      → texto do botão CTA
+//    link        → URL de afiliado (coloque o link real aqui)
+//    image       → URL da imagem do produto ("" usa placeholder)
+//    category    → campo ignorado (filtros removidos, pode apagar)
 // ============================================================
 const products = [
   {
     id: 1,
-    name: "Produto queridinho da semana",
-    description: "Aquele achadinho que todo mundo pergunta. Super pratico e com entrega rapida.",
-    tag: "Em alta",
-    price: "R$ 49,90",
+    name: "Racco Depeeling - 1 unidade",
+    description: "Espuma spray depilatoria para conferir no Mercado Livre.",
+    tag: "1 unidade",
+    price: "",
     button: "Ver produto",
-    link: "#",
-    image: ""
+    link: "https://meli.la/2G8vxNH",
+    image: "assets/1unidade.webp",
+    category: "racco"
   },
   {
     id: 2,
-    name: "Oferta boa demais",
-    description: "Preco especial por tempo limitado. Vale muito a pena conferir.",
-    tag: "Promocao",
-    price: "R$ 29,90",
-    button: "Pegar promocao",
-    link: "#",
-    image: ""
+    name: "Racco Depeeling - 2 unidades",
+    description: "Kit com 2 unidades da espuma spray depilatoria.",
+    tag: "2 unidades",
+    price: "",
+    button: "Ver produto",
+    link: "https://meli.la/1v4ctw8",
+    image: "assets/2unidades.webp",
+    category: "racco"
   },
   {
     id: 3,
-    name: "Hidratante favorito",
-    description: "Pele hidratada e com otimo aroma o dia todo. Muito bem avaliado.",
-    tag: "Favorito",
-    price: "R$ 39,90",
-    button: "Conferir agora",
-    link: "#",
-    image: ""
-  },
-  {
-    id: 4,
-    name: "Kit organizador de cozinha",
-    description: "Bonito, pratico e super duravel. Transformou minha cozinha completamente.",
-    tag: "Casa",
-    price: "R$ 89,90",
-    button: "Ver na loja",
-    link: "#",
-    image: ""
-  },
-  {
-    id: 5,
-    name: "Batom duradouro que virou febre",
-    description: "Dura o dia todo e vem em 10 cores incriveis. Excelente custo-beneficio.",
-    tag: "Beleza",
-    price: "R$ 19,90",
-    button: "Comprar agora",
-    link: "#",
-    image: ""
-  },
-  {
-    id: 6,
-    name: "Luminaria LED decorativa",
-    description: "Iluminacao elegante para qualquer ambiente. Facil de instalar.",
-    tag: "Favorito",
-    price: "R$ 59,90",
+    name: "Racco Depeeling - 3 unidades",
+    description: "Kit com 3 unidades da espuma spray depilatoria.",
+    tag: "3 unidades",
+    price: "",
     button: "Ver produto",
-    link: "#",
-    image: ""
-  },
-  {
-    id: 7,
-    name: "Mascara facial renovadora",
-    description: "Pele renovada em 15 minutos. Resultado visivel desde a primeira aplicacao.",
-    tag: "Em alta",
-    price: "R$ 44,90",
-    button: "Comprar agora",
-    link: "#",
-    image: ""
-  },
-  {
-    id: 8,
-    name: "Jogo de cama premium",
-    description: "Tecido macio e fresco. Qualidade percebida na primeira noite.",
-    tag: "Promocao",
-    price: "R$ 129,90",
-    button: "Ver oferta",
-    link: "#",
-    image: ""
-  },
-  {
-    id: 9,
-    name: "Perfume importado acessivel",
-    description: "Fragancia marcante por um preco honesto. Duracao excelente.",
-    tag: "Favorito",
-    price: "R$ 79,90",
-    button: "Ver produto",
-    link: "#",
-    image: ""
-  },
-  {
-    id: 10,
-    name: "Escova modeladora 3 em 1",
-    description: "Liso, ondulado ou cachos com uma unica escova. Otimo acabamento.",
-    tag: "Em alta",
-    price: "R$ 99,90",
-    button: "Ver produto",
-    link: "#",
-    image: ""
+    link: "https://meli.la/1GWS4JP",
+    image: "assets/3unidades.webp",
+    category: "racco"
   }
 ];
-
 // ============================================================
 //  ESTADO
 // ============================================================
@@ -210,6 +143,7 @@ document.getElementById("searchInput").addEventListener("input", (e) => {
   currentSearch = e.target.value.toLowerCase().trim();
   renderProducts();
 });
+
 
 // ============================================================
 //  INICIALIZAR
