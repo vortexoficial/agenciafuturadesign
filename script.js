@@ -120,7 +120,7 @@ const PT_TO_EN = {
     'Gerenciamento de redes sociais': 'Social media management',
     'Conteúdo orgânico com estratégia': 'Organic content with strategy',
     'para gerar confiança e virar contato': 'to build trust and turn it into contact',
-    '— no local e no digital.': '— for local and digital businesses.',
+    '- no local e no digital.': '- for local and digital businesses.',
     'A gente organiza a sua presença: mensagem clara, constância e conteúdo que educa com prova real do que você faz. Sem dancinha forçada e sem promessa milagrosa, com um plano simples que gera resultados.':
         'We organize your presence: clear messaging, consistency, and content that teaches with real proof of what you do. No forced trends and no miracle promises, with a simple plan that generates results.',
     'Para quem faz sentido': 'Who this is for',
@@ -303,8 +303,8 @@ const PT_TO_EN = {
     'R$ 900,00': 'R$ 900,00',
     'R$ 1.300,00': 'R$ 1.300,00',
     'Futura Logo': 'Futura Logo',
-    'O foco é clareza, prova e consistência — com CTAs que a pessoa entende.':
-        'The focus is clarity, proof, and consistency — with CTAs people actually understand.',
+    'O foco é clareza, prova e consistência - com CTAs que a pessoa entende.':
+        'The focus is clarity, proof, and consistency - with CTAs people actually understand.',
     'Entrega': 'Delivery',
     'Organização, direção e execução para o seu conteúdo virar clareza e resultado.':
         'Organization, direction, and execution so your content becomes clarity and results.',
@@ -873,11 +873,13 @@ function applyLanguage(lang) {
 // 0. FUNÇÃO PARA TROCAR LOGOS (LIGHT/DARK)
 function updateLogos() {
     const isDark = document.documentElement.classList.contains('dark');
+    const assetBase = document.body?.dataset?.assetBase || '';
+    const normalizedAssetBase = assetBase ? assetBase.replace(/\/$/, '') : '';
     
     // Caminhos das logos da Futura Design
     // Certifique-se de ter uma versão preta (logop.png) e uma branca (logob.png) na pasta img/
-    const logoLight = "/img/logop.webp"; // Logo PRETA (Para fundo claro)
-    const logoDark  = "/img/logob.webp"; // Logo BRANCA (Para fundo escuro)
+    const logoLight = `${normalizedAssetBase ? normalizedAssetBase + '/' : ''}img/logop.webp`; // Logo PRETA (Para fundo claro)
+    const logoDark  = `${normalizedAssetBase ? normalizedAssetBase + '/' : ''}img/logob.webp`; // Logo BRANCA (Para fundo escuro)
     
     const targetLogo = isDark ? logoDark : logoLight;
     
@@ -1139,6 +1141,15 @@ function initNewsletterForm() {
 // 2. INICIALIZAÇÃO
 (function() {
     try {
+        const forcedTheme = document.body?.dataset?.forceTheme;
+        if (forcedTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            return;
+        }
+        if (forcedTheme === 'light') {
+            document.documentElement.classList.remove('dark');
+            return;
+        }
         const theme = localStorage.getItem('theme');
         if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
@@ -1222,11 +1233,34 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(section => observer.observe(section));
 
     // 5. DARK MODE TOGGLE
-    const themeBtn = document.getElementById('theme-toggle-btn');
+    const ensureThemeButton = () => {
+        const existingBtn = document.getElementById('theme-toggle-btn');
+        if (existingBtn) {
+            existingBtn.style.zIndex = '1200';
+            return existingBtn;
+        }
+
+        const btn = document.createElement('button');
+        btn.id = 'theme-toggle-btn';
+        btn.type = 'button';
+        btn.setAttribute('aria-label', 'Alternar tema claro/escuro');
+        btn.className = 'fixed bottom-3 right-3 w-12 h-12 bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-full shadow-lg flex items-center justify-center border border-gray-200 dark:border-gray-700 hover:scale-110 transition-transform';
+        btn.style.zIndex = '1200';
+        btn.innerHTML = `
+            <i id="theme-toggle-sun" class="fas fa-sun"></i>
+            <i id="theme-toggle-moon" class="fas fa-moon hidden text-futura-accent"></i>
+        `;
+        document.body.appendChild(btn);
+        return btn;
+    };
+
+    const themeBtn = ensureThemeButton();
     const sunIcon = document.getElementById('theme-toggle-sun');
     const moonIcon = document.getElementById('theme-toggle-moon');
 
     const updateIcon = () => {
+        if (!sunIcon || !moonIcon) return;
+
         if (document.documentElement.classList.contains('dark')) {
             moonIcon.classList.remove('hidden');
             sunIcon.classList.add('hidden');
@@ -1282,6 +1316,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.style.right = '0.75rem';
         btn.style.bottom = 'calc(0.75rem + 3rem + 0.75rem)';
         btn.style.overflow = 'hidden';
+        btn.style.zIndex = '1200';
 
         updateLanguageButtonUI(btn, currentLang);
 
